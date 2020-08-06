@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-03 15:41+0200\n"
+"POT-Creation-Date: 2020-08-06 12:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -257,7 +257,18 @@ msgid "Nombre de produits disponible"
 msgstr ""
 
 #: .\dashboard\templates\components\edit\product\media.html:8
+#: .\dashboard\templates\components\edit\product\media2.html:8
 msgid "Media"
+msgstr ""
+
+#: .\dashboard\templates\components\edit\product\media2.html:17
+msgid ""
+"Le nom de l'image sera utilisé comme nom du fichier lors de son "
+"téléchargement vers AWS :"
+msgstr ""
+
+#: .\dashboard\templates\components\edit\product\media2.html:60
+msgid "Ajouter une image"
 msgstr ""
 
 #: .\dashboard\templates\components\edit\product\price.html:5
@@ -655,15 +666,15 @@ msgstr ""
 msgid "Archivage automatique"
 msgstr ""
 
-#: .\dashboard\templates\pages\home.html:30
+#: .\dashboard\templates\pages\home.html:26
 msgid "Dernières commandes"
 msgstr ""
 
-#: .\dashboard\templates\pages\home.html:45
+#: .\dashboard\templates\pages\home.html:41
 msgid "Terminer"
 msgstr ""
 
-#: .\dashboard\templates\pages\home.html:49
+#: .\dashboard\templates\pages\home.html:45
 msgid "En attente"
 msgstr ""
 
@@ -731,29 +742,29 @@ msgstr ""
 msgid "Minimum en quantité"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\others\activate_coupon.html:24
-#: .\dashboard\templates\vue\list\table.html:12
-msgid "Désactiver"
+#: .\dashboard\templates\vue\create\images.html:31
+msgid "Associer au produit"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\product.html:10
-msgid "A partir d'un url"
+#: .\dashboard\templates\vue\create\images.html:47
+msgid "Type de téléchargement"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\product.html:15
+#: .\dashboard\templates\vue\create\images.html:52
 msgid "Images existantes"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\product.html:18
-msgid "Image à partir d'un url"
+#: .\dashboard\templates\vue\create\images.html:56
+msgid "Image locale"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\product.html:21
+#: .\dashboard\templates\vue\create\images.html:60
 msgid "Vidéo YouTube"
 msgstr ""
 
-#: .\dashboard\templates\vue\create\product.html:41
-msgid "Associer au produit"
+#: .\dashboard\templates\vue\create\others\activate_coupon.html:24
+#: .\dashboard\templates\vue\list\table.html:12
+msgid "Désactiver"
 msgstr ""
 
 #: .\dashboard\templates\vue\list\export_csv.html:11
@@ -772,12 +783,52 @@ msgstr ""
 msgid "Archiver"
 msgstr ""
 
-#: .\nawoka\settings.py:145
+#: .\dashboard\views.py:868
+msgid "Une erreur s'est produite - IMG-UN"
+msgstr ""
+
+#: .\mywebsite\settings.py:141
 msgid "English"
 msgstr ""
 
-#: .\nawoka\settings.py:146
+#: .\mywebsite\settings.py:142
 msgid "Français"
+msgstr ""
+
+#: .\shop\payment.py:21
+msgid "You should install Stripe in order to use the payment logic."
+msgstr ""
+
+#: .\shop\payment.py:26
+msgid ""
+"You should provide live and secret keys in STRIPE_API_KEYS to use the "
+"payment logic"
+msgstr ""
+
+#: .\shop\payment.py:263
+msgid "You should provide a cart ID number to identify the user's cart"
+msgstr ""
+
+#: .\shop\payment.py:268
+msgid ""
+"In order to create a payment, you need to provide user informations such as "
+"firstname, lastname..."
+msgstr ""
+
+#: .\shop\payment.py:533
+msgid ""
+"You should provide a valid Orders model if you wish to update your model "
+"after purchase"
+msgstr ""
+
+#: .\shop\payment.py:539
+msgid ""
+"Your model should have a total or payment field to which we can write the "
+"total payment for the the order"
+msgstr ""
+
+#: .\shop\sizes.py:16
+msgid "La taille du buste n'est pas valide"
 msgstr ""
 
 #: .\shop\templates\components\cart\heading.html:4
@@ -826,7 +877,7 @@ msgid ""
 "    auront été expédiés. Votre date de livraison estimée entre le "
 "%(estimated_order_date)s et le %(estimated_order_date)s. \n"
 "    Vous pouvez suivre l’état de votre commande ou modifier celle-ci dans "
-"https://nawoka.fr/customer-care/.\n"
+"https://mywebsite.fr/customer-care/.\n"
 "    "
 msgstr ""
 
@@ -850,7 +901,7 @@ msgid ""
 "est en cours d'acheminement et cette commande ne peut\n"
 "        donc plus être modifiée. Si vous souhaitez retourner un article, "
 "visualiser ou modifier une autre commande, veuillez\n"
-"        consulter http://nawoka.fr.\n"
+"        consulter http://mywebsite.fr.\n"
 "    "
 msgstr ""
 
@@ -940,7 +991,7 @@ msgid "Assistance"
 msgstr ""
 
 #: .\shop\templates\pages\preview.html:4
-msgid "Preview"
+msgid "Prévisualisation"
 msgstr ""
 
 #: .\shop\templates\pages\preview.html:15
@@ -1072,6 +1123,22 @@ msgstr ""
 
 #: .\shop\templates\vue\products.html:14
 msgid "Les mieux notés"
+msgstr ""
+
+#: .\shop\views.py:535 .\shop\views.py:542
+msgid "Une erreur s'est produite - CHE-DE"
+msgstr ""
+
+#: .\shop\views.py:567
+msgid "Quelque chose c'est mal passé - CX-ATOC"
+msgstr ""
+
+#: .\shop\views.py:576
+msgid "Le panier n'existe pas"
+msgstr ""
+
+#: .\shop\views.py:599
+msgid "Ce panier n'existe pas"
 msgstr ""
 
 #: .\templates\pages\customer_care\customer_service.html:4
