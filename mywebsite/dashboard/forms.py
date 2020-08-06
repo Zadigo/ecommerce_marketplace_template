@@ -182,7 +182,6 @@ class FormMixin:
         pass
 
 
-
 class ProductForm(forms.ModelForm):
     class Meta:
         model = models.Product
@@ -461,10 +460,12 @@ class CustomerOrderForm(forms.ModelForm):
 class ImageForm(forms.ModelForm): 
     class Meta:
         model = models.Image
-        fields = ['name', 'url']
+        fields = ['name', 'url', 'variant', 'main_image']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'url': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Url'})
+            'name': custom_widgets.TextInput(attrs={'placeholder': 'Name'}),
+            'url': custom_widgets.TextInput(attrs={'placeholder': 'Url'}),
+            'variant': custom_widgets.TextInput(attrs={'placeholder': 'Variant'}),
+            'main_image': custom_widgets.CheckBoxInput()
         }
 
 

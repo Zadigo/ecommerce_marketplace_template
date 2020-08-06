@@ -228,7 +228,6 @@ class CartsView(LoginRequiredMixin, generic.ListView):
 
 
 
-
 class ImagesView(LoginRequiredMixin, generic.ListView):
     model = models.Image
     queryset = models.Image.objects.all()
@@ -236,122 +235,69 @@ class ImagesView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'images'
     paginate_by = 8
 
+    @atomic_transactions.atomic
     def post(self, request, **kwargs):
+        authorized_methods = [
+            'from-url', 'from-local'
+        ]
+
         method = request.POST.get('method')
+
         if not method:
-            return http.JsonResponse(data={'status': 'Understood'}, code=202)
+            message = {
+                'level': messages.ERROR,
+                'message': _("Une erreur s'est produite - IMG-UP"),
+                'extra_tags': 'alert-error'
+            }
+        else:
+            if method in authorized_methods:
+                name = request.POST.get('new-image-name')
+                variant = request.POST.get('new-image-variant')
 
-        if method == 'delete':
-            image_id = request.POST.get('image_id')
-            if not image_id:
-                return http.JsonResponse(data={'status': 'Ok.'}, code=202)
-            image = self.queryset.get(id=int(image_id))
-            if image_id:
-                image.delete()
-                return http.JsonResponse(data={'status': 'Success'})
-
-        if method == 'imageurl':
-            name = request.POST.get('name')
-            variant = request.POST.get('variant')
-            url = request.POST.get('url')
-            main_image = request.POST.get('mainimage')
-            image = self.model.objects.create(name=name, variant=variant, url=url)
-            if main_image == "true":
-                image.main_image = True
-                image.save()
-
-        if method == 'asmain':
-            image_id = request.POST.get('image_id')
-            image = self.model.objects.get(id=int(image_id))
-            if image:
-                if image.main_image:
-                    image.main_image = False
+                if not name:
+                    message = {
+                        'level': messages.ERROR,
+                        'message': _("Vous devez attribuer un nom à votre image - IMG-UP"),
+                        'extra_tags': 'alert-error'
+                    }
                 else:
-                    image.main_image = True
-                image.save()
+                    if method == 'from-url':
+                        url = request.POST.get('new-image-link')
+                        models.Image.objects.create(**{'name': name, 'url': url, 'variant': variant})
+                        message = {
+                            'level': messages.SUCCESS,
+                            'message': _("Vos images ont été téléchargé"),
+                            'extra_tags': 'alert-success'
+                        }
+                    elif method == 'from-local':
+                        pass
 
-        if method == 'association':
-            name = request.POST.get('product')
-            image_id = request.POST.get('image_id')
-            database_product = get_object_or_404(models.Product, name__iexact=name)
-            if database_product:
-                image = self.queryset.get(id=int(image_id))
-                database_product.images.add(image)
-                return redirect('manage_images')
-
-        return http.JsonResponse(data={'status': 'No image'})
+        messages.add_message(request, **message)
+        return redirect(reverse('dashboard:images:home'))
 
     def get_context_data(self, **kwargs):
         queryset = super().get_queryset()
         context = super().get_context_data(**kwargs)
-
-        # Pagination for VueJS
-        paginator = Paginator(queryset, 8)
+        
+        paginator = Paginator(queryset, self.paginate_by)
         page = self.request.GET.get('page')
         images = paginator.get_page(page)
-        images = serializers.ImageSerializer(instance=images.object_list, many=True)
-        context['vue_images'] = images.data
+        
+        serialized_images = serializers.ImageSerializer(images.object_list, many=True)
+        context['vue_images'] = serialized_images.data
         return context
 
-
-class ImageView(LoginRequiredMixin, generic.DetailView):
+@method_decorator(atomic_transactions.atomic, name='post')
+class ImageView(LoginRequiredMixin, generic.UpdateView):
     model = models.Image
     queryset = models.Image.objects.all()
-    template_name = 'pages/details/image.html'
+    form_class = forms.ImageForm
+    template_name = 'pages/edit/update/image.html'
     context_object_name = 'image'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_success_url(self):
         image = super().get_object()
-
-        initial_values = {'name': image.name, 'url': image.url}
-        context['form'] = forms.ImageForm(initial=initial_values)
-
-        # This section determines if the image
-        # is linked to products and if so, display
-        # these details to the user
-        products = image.product_set.all()
-        has_products = products.exists()
-        context['is_linked'] = has_products
-        if has_products:
-            context['images_form'] = forms.ImageAssociationForm(initial={'products': [products.first().name]})
-        else:
-            context['images_form'] = forms.ImageAssociationForm()
-        return context
-
-    def post(self, request, **kwargs):
-        method = request.POST.get('method')
-        image = super().get_object()
-
-        if method == 'details':
-            form = forms.ImageForm(request.POST)
-            if form.is_valid():
-                image.name = form.cleaned_data['name']
-                image.url = form.cleaned_data['url']
-                image.save()
-                messages.success(request, "L'image a été changé", extra_tags='alert-success')
-
-        if method == 'associate':
-            product_to_associate = request.POST.get('products')
-            try:
-                product = models.Product.objects.get(name__iexact=product_to_associate)
-            except exceptions.MultipleObjectsReturned:
-                messages.success(request, "Une erreur est survenue - Plusieurs produits ayant le même nom", extra_tags='alert-warning')
-                return redirect(reverse('manage_image', args=[image.id]))
-            image.product_set.clear()
-            image.product_set.add(product)
-            messages.success(request, f"Cette image a été associé à {product.name}", extra_tags='alert-success')
-
-        if method == 'dissociate':
-            if not image.product_set.all().exists():
-                messages.warning(request, f"Cette image n'était associé à aucun produit", extra_tags='alert-warning')
-            else:
-                image.product_set.clear()
-                messages.success(request, f"Cette image a été dissocié de tout produit", extra_tags='alert-success')
-
-        return redirect(reverse('manage_image', args=[image.id]))
-
-
+        return reverse('dashboard:images:update', args=[image.id])
 
 
 class SettingsView(LoginRequiredMixin, generic.TemplateView):

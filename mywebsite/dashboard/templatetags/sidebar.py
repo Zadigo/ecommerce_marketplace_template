@@ -12,7 +12,7 @@ LINKS = [
     ['collections:home', {'name': 'Collections', 'icon': 'fas fa-table'}],
     ['customer_orders', {'name': 'Commandes', 'icon': 'fas fa-table'}],
     ['carts', {'name': 'Paniers', 'icon': 'fas fa-table'}],
-    # ['manage_images', {'name': 'Images', 'icon': 'fas fa-images'}],
+    ['images:home', {'name': 'Images', 'icon': 'fas fa-images'}],
     ['coupons:home', {'name': 'Coupons', 'icon': 'fas fa-tag'}],
     # ['dashboard_users', {'name': 'Utilisateurs', 'icon': 'fas fa-user'}],
     # ['settings:home', {'name': 'Settings', 'icon': 'fas fa-cog'}],
