@@ -22,10 +22,6 @@
 		<div class="col-md-6 mb-4">
 			<div class="card">
 				<div class="card-body">
-					<button class="btn" onclick="testCelery()">
-						Test
-					</button>
-
 					<p class="font-weight-bold text-uppercase">
 						{% trans "Dernières commandes" %}
 					</p>
@@ -62,22 +58,4 @@
 
 {% block chart_scripts %}
 	{% include "scripts/bar_chart.html" %}
-{% endblock %}
-
-{% block extra_scripts %}
-	<script>
-		var testCelery = function () {
-			$.ajax({
-				type: "POST",
-				url: "{% url 'test_celery' %}",
-				dataType: "json",
-				success: function (response) {
-					console.log('TEST CELERY')
-				},
-				error: function (response) {
-					console.log('ERROR')
-				}
-			});
-		}
-	</script>
 {% endblock %}
