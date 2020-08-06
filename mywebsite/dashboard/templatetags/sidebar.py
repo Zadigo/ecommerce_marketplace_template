@@ -8,7 +8,7 @@ NAMESPACE = 'dashboard'
 
 LINKS = [
     ['index', {'name': 'Dashboard', 'icon': 'fas fa-chart-pie'}],
-    ['products:home', {'name': 'Products', 'icon': 'fas fa-table'}],
+    ['products:home', {'name': 'Produits', 'icon': 'fas fa-table'}],
     ['collections:home', {'name': 'Collections', 'icon': 'fas fa-table'}],
     ['customer_orders', {'name': 'Commandes', 'icon': 'fas fa-table'}],
     ['carts', {'name': 'Paniers', 'icon': 'fas fa-table'}],
