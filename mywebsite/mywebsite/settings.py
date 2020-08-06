@@ -30,12 +30,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+
+    'django_celery_beat',
     'accounts',
     'rest_framework',
     'django_extensions',
     'shop',
     'dashboard',
-    'django_celery_beat'
 ]
 
 MIDDLEWARE = [
@@ -291,6 +292,10 @@ CELERY_BEAT_SCHEDULE = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.environ.get('CACHE_FILE_LOCATION')
+        'LOCATION': os.environ.get('CACHE_FILE_LOCATION', os.path.join(BASE_DIR, 'cache'))
+    },
+    'inmemcache': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211'
     }
 }

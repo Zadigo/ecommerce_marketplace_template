@@ -18,8 +18,6 @@ cartpatterns = [
 urlpatterns = [
     path('cart/', include(cartpatterns)),
 
-    url(r'^tests/test-celery', views.test_celery, name='test_celery'),
-
     url(r'^lookbook$', views.LookBookView.as_view(), name='lookbook'),
     url(r'^search$', views.SearchView.as_view(), name='search'),
 

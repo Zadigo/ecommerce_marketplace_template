@@ -87,7 +87,7 @@ def creat_cart_products_from_queryset(queryset):
     return impressions
 
 
-@method_decorator(cache_page(60 * 30, cache='inmemcache'), name='dispatch')
+@method_decorator(cache_page(60 * 30), name='dispatch')
 class IndexView(generic.View):
     def get(self, request, *args, **kwargs):
         return render(request, 'pages/shop.html')
@@ -521,16 +521,7 @@ class SpecialOfferView(generic.DetailView):
             return redirect('shop_gender', 'femme')
         else:
             return product
-
-
-@csrf_exempt
-@login_required
-@http_decorator.require_POST
-def test_celery(request):
-    # tasks.purchase_complete_email.delay('mycustomer@gmail.com')
-    tasks.purchase_complete_email.apply_async()
-    return http.HttpResponse('Ok.')
-
+            
 
 @http_decorator.require_GET
 def delete_product_from_cart(request, **kwargs):
