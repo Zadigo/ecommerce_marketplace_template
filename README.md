@@ -10,9 +10,9 @@ This project came to mind as ecommerce is extremely popular nowadays becomes of 
 
 While there are many many web applications out there to build an ecommerce plateform, it can come at a certain financial cost.
 
-Additionally, you do not have complete control over your SEO or tools you wish to implement or not.
+Additionally, you do not have complete control over your SEO or tools you wish to implement because of how much they would cost especially for startup projects.
 
-Creating an ecommerce website from scratch can be a complete hassle (:lol: I've gone through it). This is where it came about creating these free templates using various free open-source tools around the internet.
+Creating an ecommerce website from scratch can be a complete hassle. This is where it came about creating these free templates using various free open-source tools around the internet.
 
 While Django is the best web framework ever and Python the greatest language to ever exist, it does not come with things typical for ecommerce websites.
 
