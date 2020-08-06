@@ -1,6 +1,3 @@
-<!-- Quill -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
 <script>
     var editor = new Quill(".editor-container", {
         modules: {
@@ -33,15 +30,4 @@
     //     field.val(JSON.stringify(editor.getContents()))
     //     htmlfield.val(editorcontent)
     // })
-</script>
-
-<script>
-    var descriptionfield = $("input[name='description']")
-    var htmlfield = $("input[name='description_html'")
-
-    var htmleditor = new Vue({
-        el: "#vue_editor_app",
-        name: "QuillEditor",
-        
-    })
 </script>

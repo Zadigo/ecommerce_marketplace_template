@@ -98,8 +98,9 @@
 	</script>
 
 	<!-- SECTIONS -->
-	{% include "vue/create/product.html" %}
-	{% include "vue/create/images.html" %}
+	{% include "vue/create/product/base.html" %}
+	<!-- EDITOR -->
+	{# {% include "vue/create/quill.html" %} #}
 	<!-- FORM -->
 	{% include "vue/create/form.html" %}
 
@@ -107,7 +108,4 @@
 	{% include "vue/create/others/duplicate.html" %}
 	<!-- CALCULATOR -->
 	{% include "vue/create/others/calculator.html" %}
-
-	<!-- EDITOR -->
-	{# {% include "vue/create/quill.html" %} #}
 {% endblock %}
