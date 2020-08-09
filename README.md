@@ -1,8 +1,8 @@
 # Django Ecommerce Website
 
-This template is an __ecommerce website intended for a single business owner that wants to sell products online on his own store.__
+This template is an __ecommerce website intended for a multiple users to login, create a store and start selling products online in a similar way you would do with Shopify.__
 
-If you are interested in a marketplace __where differenct users can login in a similar way to Shopify, create different stores in which they can create different set of products and start selling directly to customers__ checkout [this template instead](https://example.com).
+If you are interested in single store __where you want to sell your own products online__ checkout [this template instead](https://github.com/Zadigo/ecommerce_template).
 
 # About
 
