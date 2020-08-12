@@ -204,7 +204,7 @@
             }
         },
         methods: {
-            sendanalytics: function() {
+            sendanalytics: function () {
                 dataLayer.push({
                     "event": "AddToCart",
                     "ecommerce": {
@@ -224,7 +224,7 @@
                     }
                 })
             },
-            addtolikes: function() {
+            addtolikes: function () {
                 dataLayer.push({
                     "event": "ProductLike",
                     "product": {
@@ -234,7 +234,7 @@
                     }
                 })
             },
-            addtocart: function() {
+            addtocart: function () {
                 var self = this
                 var formdata = new FormData()
 
@@ -248,7 +248,7 @@
                 var promise = new Promise((resolve, reject) => {
                     var xhr = new XMLHttpRequest()
                     xhr.responseType = "json"
-                    xhr.onloadend = function() {
+                    xhr.onloadend = function () {
                         if (xhr.status == 200) {
                             resolve(xhr.response)
                         }
@@ -256,7 +256,7 @@
                             window.location.reload()
                         }
                         if (xhr.status === 405) {
-                            
+
                         }
                     }
                     xhr.open("POST", window.location.href)
@@ -269,11 +269,11 @@
             }
         }
     }
-    
+
     var product = new Vue({
         el: "#vue_app",
         name: "Product",
-        components: {addtocart},
+        components: { addtocart },
         data() {
             return {
                 product: {},
@@ -317,7 +317,7 @@
                 })
             } else {
                 this.$data.sizes = [
-                    {id: 1, name: "Taille unique", value: "Taille unique"}
+                    { id: 1, name: "Taille unique", value: "Taille unique" }
                 ]
             }
 
@@ -335,13 +335,13 @@
             }
         },
         methods: {
-            doselection: function(method, item) {
+            doselection: function (method, item) {
                 this.$data.details[method] = item
             },
-            display: function(index) {
+            display: function (index) {
                 this.$data.currentindex = index
             },
-            cartbuttonclicked: function() {
+            cartbuttonclicked: function () {
                 this.$data.clicked = true
                 setTimeout(() => {
                     this.$data.clicked = false
