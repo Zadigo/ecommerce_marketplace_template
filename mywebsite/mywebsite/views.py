@@ -12,7 +12,7 @@ from mywebsite import forms
 
 
 class HeroView(generic.TemplateView):
-    template_name = 'pages/home/hero.html'
+    template_name = 'mdbootstrap/pages/home/hero.html'
 
 @view_decorators.require_POST
 def subscribe_user(request, **kwargs):

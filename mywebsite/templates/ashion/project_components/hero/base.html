@@ -1,0 +1,24 @@
+{% load i18n %}
+
+{% block title %}Home{% endblock %}
+
+{% block navbar %}
+    {% include "project_components/navs/nav.html" %}
+{% endblock %}
+
+{% block hero %}
+    <!-- SLIDER -->
+    {% include "project_components/hero/slider.html" %}
+    <!-- FEATURES -->
+    {% include "project_components/hero/features.html" %}
+    <!-- LATEST PRODUCTS -->
+    {% include "project_components/hero/products.html" %}
+    <!-- LOOKBOOK -->
+    {% include "project_components/hero/lookbook.html" %}
+    <!-- LOGOS -->
+    {% include "project_components/hero/logos.html" %}
+{% endblock %}
+
+{% block footer %}
+    {% include "project_components/navs/footer.html" %}
+{% endblock %}

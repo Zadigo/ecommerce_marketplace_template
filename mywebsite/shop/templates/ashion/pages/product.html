@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Product{% endblock %}
+
+{% block navbar %}
+    {% include "project_components/navs/nav.html" %}
+{% endblock %}
+
+{% block main %}
+    <section class="product-page">
+        <div class="container">
+            <div class="product-control">
+                <a href="#">
+                    {% trans "Previous" %}
+                </a>
+                <a href="#">
+                    {% trans "Next" %}
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product-slider owl-carousel">
+                        <div class="product-img">
+                            <figure>
+                                <img src="img/product/product-1.jpg" alt="">
+                                <div class="p-status">new</div>
+                            </figure>
+                        </div>
+                        <div class="product-img">
+                            <figure>
+                                <img src="img/product/product-1.jpg" alt="">
+                                <div class="p-status">new</div>
+                            </figure>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-content">
+                        <h2>Dotted Blue Shirt</h2>
+                        <div class="pc-meta">
+                            <h5>$22.90</h5>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
+                            viverra maecenas accumsan lacus vel facilisis.
+                        </p>
+                        <ul class="tags">
+                            <li><span>Category :</span> Men’s Wear</li>
+                            <li><span>Tags :</span> man, shirt, dotted, elegant, cool</li>
+                        </ul>
+                        <div class="product-quantity">
+                            <div class="pro-qty">
+                                <input type="text" value="1">
+                            </div>
+                        </div>
+                        <a href="#" class="primary-btn pc-btn">
+                            {% trans "Add to cart" %}
+                        </a>
+                        <ul class="p-info">
+                            <li>
+                                {% trans "Product Information" %}
+                            </li>
+                            <li>
+                                {% trans "Reviews" %}
+                            </li>
+                            <li>
+                                {% trans "Product Care" %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELATED -->
+    {% include "components/product/related.html" %}
+{% endblock %}
+
+
+{% block navbar %}
+    {% include "project_components/navs/footer.html" %}
+{% endblock %}

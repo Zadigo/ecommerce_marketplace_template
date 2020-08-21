@@ -90,11 +90,11 @@ def creat_cart_products_from_queryset(queryset):
 @method_decorator(cache_page(60 * 30), name='dispatch')
 class IndexView(generic.View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'pages/shop.html')
+        return render(request, 'mdboostrap/pages/shop.html')
 
 
 class LookBookView(generic.TemplateView):
-    template_name = 'pages/lookbook.html'
+    template_name = 'mdboostrap/pages/lookbook.html'
 
 
 class ShopGenderView(generic.View):
@@ -103,12 +103,12 @@ class ShopGenderView(generic.View):
         context = {
             'collections': collections[:3]
         }
-        return render(request, 'pages/shop_gender.html', context)
+        return render(request, 'mdboostrap/pages/shop_gender.html', context)
 
 
 class ProductsView(generic.ListView):
     model = models.ProductCollection
-    template_name = 'pages/collections.html'
+    template_name = 'mdboostrap/pages/collections.html'
     context_object_name = 'products'
     paginate_by = 12
     ordering = '-created_on'
@@ -168,7 +168,7 @@ class ProductsView(generic.ListView):
 class ProductView(generic.DetailView):
     model = models.Product
     queryset = models.Product.objects.all()
-    template_name = 'pages/product.html'
+    template_name = 'mdboostrap/pages/product.html'
     context_object_name = 'product'
 
     def post(self, request, **kwargs):
@@ -204,7 +204,7 @@ class PreviewProductView(LoginRequiredMixin, generic.DetailView):
     """
     model = models.Product
     queryset = models.Product.objects.all()
-    template_name = 'pages/preview.html'
+    template_name = 'mdboostrap/pages/preview.html'
     context_object_name = 'product'
     http_method_names = ['get']
 
@@ -235,7 +235,7 @@ class PrivateProductView(generic.DetailView):
     """
     model = models.Product
     queryset = models.Product.product_manager.private_products()
-    template_name = 'pages/product.html'
+    template_name = 'mdboostrap/pages/product.html'
     context_object_name = 'product'
 
     def post(self, request, **kwargs):
@@ -261,7 +261,7 @@ class PrivateProductView(generic.DetailView):
 
 class CheckoutView(generic.ListView):
     model = models.Cart
-    template_name = 'pages/cart.html'
+    template_name = 'mdboostrap/pages/cart.html'
     context_object_name = 'constructed_products'
 
     def get(self, request, **kwargs):
@@ -304,7 +304,7 @@ class CheckoutView(generic.ListView):
 @method_decorator(cache_control(private=True), name='dispatch')
 class ShipmentView(generic.ListView):
     model = models.Cart
-    template_name = 'pages/shipment.html'
+    template_name = 'mdboostrap/pages/shipment.html'
     context_object_name = 'products'
 
     def get(self, request, **kwargs):
@@ -340,7 +340,7 @@ class ShipmentView(generic.ListView):
 @method_decorator(never_cache, name='dispatch')
 class PaymentView(generic.ListView):
     model = models.Cart
-    template_name = 'pages/payment.html'
+    template_name = 'mdboostrap/pages/payment.html'
     context_object_name = 'products'
 
     def get(self, request, **kwargs):
@@ -431,7 +431,7 @@ class ProcessPayment(generic.View):
 
 @method_decorator(cache_control(private=True), name='dispatch')
 class CartSuccessView(generic.TemplateView):
-    template_name = 'pages/success.html'
+    template_name = 'mdboostrap/pages/success.html'
 
     def get(self, request, *args, **kwargs):
         context = {}
@@ -446,13 +446,13 @@ class CartSuccessView(generic.TemplateView):
             context['payment'] = data['payment']
             context['transaction'] = data['transaction']
             context['reference'] = data['reference']
-            return render(request, 'pages/success.html', context=context)
+            return render(request, 'mdboostrap/pages/success.html', context=context)
         else:
             return redirect('no_cart')
 
 
 class EmptyCartView(generic.TemplateView):
-    template_name = 'pages/no_cart.html'
+    template_name = 'mdboostrap/pages/no_cart.html'
 
 
 @http_decorator.require_POST
@@ -477,7 +477,7 @@ def apply_coupon(request, **kwargs):
 
 class SearchView(generic.ListView):
     model = models.Product
-    template_name = 'pages/search.html'
+    template_name = 'mdboostrap/pages/search.html'
     context_object_name = 'products'
     paginate_by = 10
 
@@ -509,7 +509,7 @@ class SearchView(generic.ListView):
   
 class SpecialOfferView(generic.DetailView):
     model = models.Discount
-    template_name = 'pages/product.html'
+    template_name = 'mdboostrap/pages/product.html'
     context_object_name = 'product'
 
     def get_queryset(self):
